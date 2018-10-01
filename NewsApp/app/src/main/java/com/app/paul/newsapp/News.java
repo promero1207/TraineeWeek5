@@ -1,13 +1,17 @@
 package com.app.paul.newsapp;
 
+/**
+ * class base for new
+ */
 public class News {
+    //fields
     private String headline;
     private String section;
     private String thumnail;
     private String body;
     private String web;
 
-
+    //constructor
     public News(String headline, String section, String thumnail, String body, String web) {
         this.headline = headline;
         this.section = section;
@@ -16,6 +20,7 @@ public class News {
         this.web = web;
     }
 
+    //setters and getters
     public String getHeadline() {
         return headline;
     }

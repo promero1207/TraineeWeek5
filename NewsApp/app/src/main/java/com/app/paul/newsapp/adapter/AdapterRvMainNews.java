@@ -19,17 +19,21 @@ import com.app.paul.newsapp.R;
 import java.io.InputStream;
 import java.util.List;
 
+/**
+ * adapter for recycler view
+ */
 public class AdapterRvMainNews extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private OnItemClickListener listener;
     private List<News> adapterList;
 
 
+    //constructor
     public AdapterRvMainNews(List<News> list, OnItemClickListener listener) {
         adapterList = list;
         this.listener = listener;
     }
 
-
+    //return viewtype depending on position, 0 for loading progress view; 1 for news
     @Override
     public int getItemViewType(int position) {
 
@@ -40,6 +44,7 @@ public class AdapterRvMainNews extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
+    //creates holder
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -53,6 +58,7 @@ public class AdapterRvMainNews extends RecyclerView.Adapter<RecyclerView.ViewHol
         return new ViewHolder(v);
     }
 
+    //on binding holder
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         if(holder.getItemViewType() == 0) {
@@ -62,12 +68,13 @@ public class AdapterRvMainNews extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
+    //geting list size count
     @Override
     public int getItemCount() {
         return adapterList.size();
     }
 
-
+    //View holder
     public  class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView headline;
@@ -86,12 +93,15 @@ public class AdapterRvMainNews extends RecyclerView.Adapter<RecyclerView.ViewHol
         }
     }
 
+    //on click interface
     public interface OnItemClickListener {
         void onItemClick(Integer position);
     }
 
 
-
+    /**
+     * method for downloading and showing image from url
+     */
     public static class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         @SuppressLint("StaticFieldLeak")
         ImageView bmImage;

@@ -16,12 +16,17 @@ import static com.app.paul.newsapp.fragments.FragmentBase.SHOW_IMG;
 import static com.app.paul.newsapp.fragments.FragmentBase.SHOW_TITLE;
 import static com.app.paul.newsapp.fragments.FragmentBase.SHOW_WEB;
 
+/**
+ * Activity for showing new information
+ */
 public class ShowNew extends AppCompatActivity {
+    //fields
     String title = "";
     String body = "";
     String img_url = "";
     String web_url = "";
 
+    //on create method for inflating view
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +74,7 @@ public class ShowNew extends AppCompatActivity {
     }
 
 
+    //metho for open web url on browser
     public void openWebPage(String url) {
         Uri webpage = Uri.parse(url);
         Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
@@ -77,6 +83,7 @@ public class ShowNew extends AppCompatActivity {
         }
     }
 
+    //method for back arrow pressed
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if(item.getItemId() == android.R.id.home){

@@ -17,15 +17,21 @@ import com.app.paul.newsapp.fragments.FragmentBase;
 
 import static com.app.paul.newsapp.adapter.AdapterFragmentPager.PATH_TO_NEWS;
 
+/**
+ * Main activity; Main screen
+ */
 public class MainActivity extends AppCompatActivity {
     FrameLayout container;
     FragmentBase fragment;
 
+    /**
+     * On create method, inflating view
+     * @param savedInstanceState Bundle of data saved after a conf change
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         ViewPager mViewPagerTour = findViewById(R.id.view_pager);
         AdapterFragmentPager adapterFragmentPager = new AdapterFragmentPager(getSupportFragmentManager());
@@ -37,7 +43,11 @@ public class MainActivity extends AppCompatActivity {
         mTabLayoutHost.setTabGravity(TabLayout.GRAVITY_CENTER);
     }
 
-
+    /**
+     * Menu in the top of screen, for searchview
+     * @param menu menu to be inflated
+     * @return boolean
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -77,6 +87,11 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * item selected from menu
+     * @param item item in this case searchview
+     * @return boolean
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
@@ -87,11 +102,9 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public void onOptionsMenuClosed(Menu menu) {
-        super.onOptionsMenuClosed(menu);
-    }
-
+    /**
+     * method to be called to put the search fragment
+     */
     public void putSearchFragment(){
 
         android.support.v4.app.FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

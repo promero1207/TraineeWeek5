@@ -76,6 +76,11 @@ public class AdapterFragmentPager extends FragmentStatePagerAdapter {
         return 6;
     }
 
+    /**
+     * return page title
+     * @param position position
+     * @return string
+     */
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {

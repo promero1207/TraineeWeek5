@@ -20,12 +20,21 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class for creating json and making https request
+ */
 public final class Query {
     private static final String LOG_TAG = Query.class.getSimpleName();
 
+    //constructor
     private Query() {
     }
 
+    /**
+     *
+     * @param path path of the query
+     * @return list of news
+     */
     public static List<News> getNewsData(String path){
         URL url = createUrl(path);
         String jsonParsed = null;
@@ -37,6 +46,11 @@ public final class Query {
         return extractJson(jsonParsed);
     }
 
+    /**
+     * Method for creating url
+     * @param stringUrl url string
+     * @return url created
+     */
     private static URL createUrl(String stringUrl) {
         URL url = null;
         try {
@@ -47,6 +61,12 @@ public final class Query {
         return url;
     }
 
+    /**
+     * Method for making http request
+     * @param url url
+     * @return full json string read from input stream
+     * @throws IOException can throw exception if no connection can be reached
+     */
     private static String makeHttpRequest(URL url) throws IOException {
         String jsonResponse = "";
 
@@ -88,6 +108,12 @@ public final class Query {
         return jsonResponse;
     }
 
+    /**
+     * method for reading from stream
+     * @param inputStream stream
+     * @return string in utf-8 format
+     * @throws IOException exception if strin cant be build
+     */
     private static String readFromStream(InputStream inputStream) throws IOException {
         StringBuilder output = new StringBuilder();
         if (inputStream != null) {
@@ -102,6 +128,11 @@ public final class Query {
         return output.toString();
     }
 
+    /**
+     * method for parsing json
+     * @param json json string
+     * @return list of news parsed from json
+     */
     private static List<News> extractJson(String json) {
         // If the JSON string is empty or null, then return early.
         if (TextUtils.isEmpty(json)) {
