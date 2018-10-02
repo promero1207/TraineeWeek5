@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -19,7 +20,6 @@ import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.SearchView;
 
 import com.app.paul.newsapp.News;
 import com.app.paul.newsapp.R;
@@ -40,6 +40,7 @@ public class FragmentBase extends Fragment implements AdapterRvMainNews.OnItemCl
     public static final String SHOW_IMG = "SHOW_IMG";
     public static final String SHOW_WEB = "SHOW_WEB";
     public static final String SCROLL = "SCROLL";
+    public static final String ID = "ID";
 
     //fields
     private List<News> newsList = new ArrayList<>();
@@ -128,10 +129,20 @@ public class FragmentBase extends Fragment implements AdapterRvMainNews.OnItemCl
         });
 
         buildString(initialQuery);
-        load(0);
+
+        if(savedInstanceState == null){
+            load(0);
+        }
+        else {
+            isSearching = true;
+            load(savedInstanceState.getInt(ID));
+            cont++;
+
+        }
 
         return v;
     }
+
 
 
     //Method for on click event of recyclerview
@@ -174,9 +185,6 @@ public class FragmentBase extends Fragment implements AdapterRvMainNews.OnItemCl
                 newsList.addAll(data);
             }
 
-            if (customBundle != null && recyclerNews.getLayoutManager() != null) {
-                recyclerNews.getLayoutManager().onRestoreInstanceState(customBundle.getParcelable(SCROLL));
-            }
             if (isNewData) {
                 newsList.addAll(data);
                 isNewData = false;
@@ -215,8 +223,8 @@ public class FragmentBase extends Fragment implements AdapterRvMainNews.OnItemCl
             //saving scroll of recycler
             outState.putParcelable(SCROLL, recyclerNews.getLayoutManager().onSaveInstanceState());
         }
+        outState.putInt(ID,getCont() -1);
         super.onSaveInstanceState(outState);
-
     }
 
 
